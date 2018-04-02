@@ -11,7 +11,19 @@ const routes: Routes = [
   {
     path: 'data',
     component: DataComponent
+  },
+  {
+    path: 't',
+    redirectTo: 'todos',
+    pathMatch: 'full'
+//  prefix: default, matches when the URL starts with the value of path
+//  full: matches when the URL equals the value of path.
   }
+  // },
+  // {
+  //   path: '**',
+  //   component: PageNotFoundComponent
+  // }
 ];
 
 @NgModule({
