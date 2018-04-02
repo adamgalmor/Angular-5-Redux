@@ -21,7 +21,7 @@ export class AppComponent {
     // this.subscription = ngRedux.select<number>('count').subscribe(newCount => { //*
     //     this.count = newCount
     //   });
-      this.count$ = ngRedux.select<number>('count'); //*
+      this.count$ = ngRedux.select<number>('count');
      }
 
     // ngOnDestroy() { //*
