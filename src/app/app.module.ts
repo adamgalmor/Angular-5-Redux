@@ -1,3 +1,6 @@
+import { NgRedux, NgReduxModule, DevToolsExtension  } from '@angular-redux/store';
+import { IAppState, rootReducer, INITIAL_STATE } from './store';
+import { CounterActions } from './app.actions';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -16,6 +19,7 @@ import { HeaderComponent } from './header/header.component';
 @NgModule({
   imports: [BrowserModule,
     AppRoutingModule,
+    NgReduxModule,
     BrowserAnimationsModule,
     FormsModule,
     CdkTableModule,
@@ -23,6 +27,20 @@ import { HeaderComponent } from './header/header.component';
     AppMaterialModules],
   declarations: [AppComponent, HeaderComponent, DataCollectionComponent, routingComponents],
   bootstrap: [AppComponent],
-  providers: [APIService]
+  providers: [APIService, CounterActions]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(ngRedux: NgRedux<IAppState>, 
+              devTools: DevToolsExtension //for the DevToolsExtension
+    ) {
+    const storeEnhancers = devTools.isEnabled() ? [devTools.enhancer()] : []; //for the DevToolsExtension
+
+    // Tell @angular-redux/store about our rootReducer and our initial state.
+    // It will use this to create a redux store for us and wire up all the
+    // events.
+    ngRedux.configureStore(
+      rootReducer,
+      INITIAL_STATE,
+      [], storeEnhancers); //for the DevToolsExtension
+  }
+}
