@@ -44,15 +44,15 @@ export class DataCollectionComponent {
   }
 }
 
-export class MyDataSource1 extends DataSource<any[]> {
-  constructor(private subject: BehaviorSubject<any[]>) {
-    super ();
-  }
-  connect (): Observable<any[]> {
-    return this.subject.asObservable();
-  }
-  disconnect (): void {}
-}
+// export class MyDataSource1 extends DataSource<any[]> {
+//   constructor(private subject: BehaviorSubject<any[]>) {
+//     super ();
+//   }
+//   connect (): Observable<any[]> {
+//     return this.subject.asObservable();
+//   }
+//   disconnect (): void {}
+// }
 
 export class MyDataSource extends DataSource<any> {
   _filterChange = new BehaviorSubject('');
